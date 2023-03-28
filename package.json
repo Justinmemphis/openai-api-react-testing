@@ -1,0 +1,28 @@
+{
+  "name": "openai-api-react-testing",
+  "version": "1.0.0",
+  "description": "testing openAI API with react",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Justinmemphis/openai-api-react-testing.git"
+  },
+  "keywords": [
+    "openAI",
+    "API",
+    "react"
+  ],
+  "author": "Justin Carter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Justinmemphis/openai-api-react-testing/issues"
+  },
+  "homepage": "https://github.com/Justinmemphis/openai-api-react-testing#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "path": "^0.12.7"
+  }
+}
