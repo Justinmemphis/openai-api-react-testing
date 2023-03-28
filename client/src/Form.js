@@ -1,40 +1,29 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      response: "",
-    };
-  }
+function Form() {
+	const [queryResult, setQueryResult] = useState(null);
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    fetch("/submit", {
-      method: "GET",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => this.setState({ response: data.message }))
-      .catch((error) => console.error(error));
-  };
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const formData = new FormData(event.target);
+		const query = formData.get('query');
+		fetch(`/submit?query=${query}`)
+			.then((response) => response.json())
+			.then((data) => setQueryResult(data.result))
+			.catch((error) => console.log(error));
+	};
 
-  render() {
-    return (
-      <div>
-	<h1>OpenAI Demo</h1>
-	<form onSubmit={this.handleSubmit}>
-		<label htmlFor="text-input">Enter a prompt:</label>
-		<br />
-		<textarea name="text-input" id="text-input" cols="30" rows="10"></textarea>
-		<br />
-		<button type="submit">Submit</button>
-	</form>
-	{this.state.response && <p>{this.state.response}</p>}
-      </div>
-    );
-  }
+	return (
+	      		<div>
+				<h1>OpenAI Demo</h1>
+				<form onSubmit={handleSubmit}>
+					<label htmlFor="query">Enter a prompt:</label>
+					<input type="text" name="query" id="query" />
+					<button type="submit">Submit</button>
+				</form>
+				{queryResult && <p>{queryResult}</p>}
+			</div>
+	);
 }
 
 export default Form;

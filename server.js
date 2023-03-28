@@ -22,13 +22,13 @@ const openai = new OpenAIApi(configuration);
 app.use(express.static(path.join(__dirname, './client/build')));
 
 app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/client/build/index.html');
+	res.sendFile(__dirname + 'index.html');
 });
 
-app.get('/submit', (req, res) => {
+app.get('/submit', async (req, res) => {
 	const prompt = req.query.prompt;
 
-	openai.createCompletion({
+	await openai.createCompletion({
 		model: "Text-davinci-003",
 		prompt: prompt,
 		temperature: 0.4,
