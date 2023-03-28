@@ -11,8 +11,8 @@ class Form extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    fetch("/api/openai", {
-      method: "POST",
+    fetch("/submit", {
+      method: "GET",
       body: formData,
     })
       .then((res) => res.json())
