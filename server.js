@@ -25,19 +25,22 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + 'index.html');
 });
 
-app.get('/submit', async (req, res) => {
+app.get('/submit', (req, res) => {
 	const prompt = req.query.prompt;
 
-	await openai.createCompletion({
-		model: "Text-davinci-003",
+	openai.createCompletion({
+		model: "text-davinci-003",
 		prompt: prompt,
-		temperature: 0.4,
+		temperature: 0,
 		max_tokens: 150,
-		frequency_penalty: 0,
+		frequency_penalty: 0.6,
 		presence_penalty: 0.6
 	})
 	.then((response) => {
 		res.send(response.data.choices);
+	})
+	.catch((error) => {
+		res.json(error);
 	});
 });
 
